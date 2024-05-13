@@ -37,6 +37,8 @@
 
 
 			function change_session() {
+				window.size = min(windowWidth, windowHeight);
+				createCanvas(size, size);
 				draw_background();
 				fill_select_ids_session();
 			}
