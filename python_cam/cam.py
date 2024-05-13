@@ -1,14 +1,19 @@
 import cv2, numpy, requests
 
-X = 357
-Y = 235
-max_circle = 0
+
+
 
 class Dt:
 
     def Detect_tir(channel = 0):
 
         cam = cv2.VideoCapture(channel)
+        width  = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))   # float `width`
+        height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT)) # float `height`
+        max_circle = int(min(width,height) / 2 )
+        X = int(width/2)
+        Y = int(height/2)
+
         focus =  False
         tir_x = None
         tir_y = None
@@ -20,8 +25,8 @@ class Dt:
             img_gris = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             _, utile = cv2.threshold(img_gris, 240, 255, cv2.THRESH_BINARY)
             contours, _ = cv2.findContours(utile, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-            center_x, center_y = False, False
 
+            center_x, center_y = False, False
 
 
             lst = []
@@ -39,12 +44,11 @@ class Dt:
                         cv2.circle(frame, (center_x, center_y), round(rayon*1.5), (0, 255, 0) , -1)
 
             for x in range(6):
-                max_circle = ((x+1)*2)*21
-                cv2.circle(frame, (X, Y), max_circle , (255, 0, 0) , 2)
+                cv2.circle(frame, (X, Y), int(x * (max_circle/6)), (255, 0, 0) , 2)
 
             if len(lst) > 0 and not focus:
                 tir_x = int((center_x - X ) * 100 / max_circle)
-                tir_y = int((center_y - Y ) * 100 / max_circle)
+                tir_y = int(- (center_y - Y ) * 100 / max_circle)
                 print(f'tir : ({tir_x, tir_y})')
                 response = requests.get('http://localhost/SIMO/recordCoordinates.php',params = {"x": tir_x , "y":tir_y})
                 print(response.status_code)
