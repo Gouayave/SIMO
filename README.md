@@ -1,7 +1,6 @@
-# Demo:
-> https://www.veed.io/view/fr-FR/d260b5dc-6a2c-438b-b5c3-77556ff37569?panel=
-
-# TODO:
-
-- Refaire les cercles 'bleus' de la bonne taille pour la caméra.
-- Gérer probléme d'affichage du select 
+> Installer et activer mamp
+> Avoir un switch wifi avec une ip fixe en 192.168.0.2
+>
+TODO : 
+- Faire fonctionner une raspberry avec une camera.
+- 
