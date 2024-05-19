@@ -43,8 +43,15 @@ class Dt:
                         lst.append([center_x, center_y])
                         cv2.circle(frame, (center_x, center_y), round(rayon*1.5), (0, 255, 0) , -1)
 
-            for x in range(6):
-                cv2.circle(frame, (X, Y), int(x * (max_circle/6)), (255, 0, 0) , 2)
+            # Dessiner les 6 cercle
+            cv2.circle(frame, (X, Y), int(max_circle *0.93) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.91) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.75) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.59) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.43) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.21) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.09) , (255, 0, 0) , 1)
+            cv2.circle(frame, (X, Y), int(max_circle *0.07) , (255, 0, 0) , 1)
 
             if len(lst) > 0 and not focus:
                 tir_x = int((center_x - X ) * 100 / max_circle)
